@@ -1,10 +1,15 @@
 import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Words {
 	
 	private String answer;
-	private String[] wordsArr;
+	private int numOfWords;
+	private ArrayList<String> listOfWords = new ArrayList<>();
 	
 	
 	/*
@@ -13,62 +18,69 @@ public class Words {
 	public Words(int difficulty) {
 		int wordSize = 0;
 		if (difficulty==1) {
-			wordsArr = new String[7];
+			numOfWords=7;
 			wordSize=4;
 		}
 		else if (difficulty==2) {
-			wordsArr = new String[9];
+			numOfWords=9;
 			wordSize=5;
 		}
 		else if (difficulty==3) {
-			wordsArr = new String[11];
+			numOfWords=11;
 			wordSize=6;
 		}
 		else if (difficulty==4) {
-			wordsArr = new String[13];
+			numOfWords=13;
 			wordSize=7;
 		}
 		else if (difficulty==5) {
-			wordsArr = new String[15];
+			numOfWords=15;
 			wordSize=8;
 		}
 		
-		LineNumberReader reader = null;
+		Random rand = new Random();
+		Path file = Paths.get("src/enable1.txt");
+		FileInputStream inputStream = null;
+		Scanner sc = null;
 		try {
-			reader = new LineNumberReader(new FileReader("src/enable1.txt"));
-		} 
-		catch (FileNotFoundException e) {
-			System.out.println("Error: File not found");
+		   while (listOfWords.size() < numOfWords) {
+				inputStream = new FileInputStream("src/enable1.txt");
+			    sc = new Scanner(inputStream, "UTF-8");
+			    int lineToRead = rand.nextInt(172819);
+			    int count = 0;
+			    boolean found = false;
+			    while (sc.hasNextLine() && listOfWords.size()<numOfWords && found == false) {
+			        String line = sc.nextLine();
+			        count++;
+					if (line.length()==wordSize && count>=lineToRead-300 && count<=lineToRead+300) {
+						listOfWords.add(line);	
+						found = true;
+					}
+				}
+		   }
+	
+		    if (sc.ioException() != null) {
+		        throw sc.ioException();
+		    }
+		} catch (FileNotFoundException e) {
+			System.out.println("Error file not found");
+		} catch (IOException e) {
+			System.out.println("Error reading line");
+		} finally {
+		    if (inputStream != null) {
+		        try {
+					inputStream.close();
+				} catch (IOException e) {
+					System.out.println("Error closing file");
+				}
+		    }
+		    if (sc != null) {
+		        sc.close();
+		    }
 		}
 		
-		Random rand = new Random();
-		int wordsChosen = 0;
-		String temp = null;
-		while (wordsChosen<wordsArr.length) {
-			reader.setLineNumber(rand.nextInt(172819)); //pick a random line in file
-			try {
-				temp = reader.readLine();
-			} catch (IOException e) {
-				System.out.println("Error reading line in file");
-			}
-			
-			boolean match = false;
-			for (int i = 0; i < wordsArr.length; i++) {
-				if (temp == wordsArr[i]) {
-					match = true;
-					break;
-				}
-			}
-			if (!match) {
-				if (temp.length() == wordSize) {	// if no match and if correct size, add to array
-					wordsArr[wordsChosen] = temp;
-					wordsChosen++;
-				}
-			}
-		}// end of while loop
-		
-		//Randomly choose an answer from the chosen set of words
-		answer = wordsArr[rand.nextInt(wordsArr.length)];
+		int index = rand.nextInt(numOfWords);
+		answer = listOfWords.get(2);
 		
 	}// end of constructor
 	
@@ -77,9 +89,9 @@ public class Words {
 	 * @return All words in wordsArr on their own line
 	 */
 	public String returnWordsList() {
-		String str = null;
-		for (int i = 0; i < wordsArr.length; i++) {
-			str+=wordsArr[i];
+		String str = "";
+		for (int i = 0; i < listOfWords.size(); i++) {
+			str+=listOfWords.get(i);
 			str+="\n";
 		}
 		return str; 
