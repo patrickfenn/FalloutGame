@@ -9,6 +9,8 @@ public class Words {
 	
 	private String answer;
 	private int numOfWords;
+	private int amountOfGuesses;
+	private static int totalScore;
 	private ArrayList<String> listOfWords = new ArrayList<>();
 	
 	
@@ -16,6 +18,7 @@ public class Words {
 	 * @param difficulty The level of difficulty (1-5) that the player will choose.
 	 */
 	public Words(int difficulty) {
+		amountOfGuesses = 4;
 		int wordSize = 0;
 		if (difficulty==1) {
 			numOfWords=7;
@@ -80,7 +83,7 @@ public class Words {
 		}
 		
 		int index = rand.nextInt(numOfWords);
-		answer = listOfWords.get(2);
+		answer = listOfWords.get(index);
 		
 	}// end of constructor
 	
@@ -104,14 +107,57 @@ public class Words {
 	 */
 	public int checkMatches(String guess) { 
 		int matches = 0;
-		if (guess==answer)
-			return 999;
-		 
-		for (int i = 0; i < answer.length() && i < guess.length(); i++)
-			if (guess.charAt(i) == answer.charAt(i))
+		for (int i = 0; i < answer.length() && i < guess.length(); i++) {
+			if (guess.charAt(i) == answer.charAt(i)) {
 				matches++;
-	
+				if (matches == answer.length()) {
+					return 999;
+				}
+			}
+		}
 		return matches;
 	}
-
+	
+	public void increaseTotalScore() {
+		if (numOfWords == 7) {
+			totalScore += 20;
+		} else if (numOfWords == 9) {
+			totalScore += 30;
+		} else if (numOfWords == 11) {
+			totalScore += 40;
+		} else if (numOfWords == 13) {
+			totalScore += 50;
+		} else if (numOfWords == 15) {
+			totalScore += 60;
+		}
+		return;
+	}
+	
+	
+	/*
+	 * @return Returns totalScore;
+	 */
+	public int getTotalScore() {
+		return totalScore;
+	}
+	
+	
+	public void guessTaken() {
+		amountOfGuesses--;
+	}
+	/*
+	 * @return Returns the amount of guesses left
+	 */
+	public int getGuessesLeft() {
+		return amountOfGuesses;
+	}
+	
+	
+	/*
+	 * @return Returns the arraylist
+	 */
+	public ArrayList<String> getWordList() {
+		return listOfWords;
+	}
+	
 }
