@@ -15,6 +15,8 @@ public class Words {
 	private String lastWord;
 	
 	/*
+	 * Loads a random set of words into an ArrayList. The length of words and
+	 * the number of words is based on the difficulty.
 	 * @param difficulty The level of difficulty (1-5) that the player will choose.
 	 */
 	public Words(int difficulty) {
@@ -133,6 +135,15 @@ public class Words {
 		return matches;
 	}
 	
+	
+	/*
+	 * Increase the total score according to difficulty:
+	 * 1: +20
+	 * 2: +30
+	 * 3: +40
+	 * 4: +50
+	 * 5: +60
+	 */
 	public void increaseTotalScore() {
 		if (numOfWords == 7) {
 			totalScore += 20;
@@ -177,7 +188,8 @@ public class Words {
 	
 	
 	/*
-	 * @return how difficult a word will be based on length and repeated characters
+	 * @return How difficult a word will be based on length and repeated characters
+	 * @param word The word to analyze
 	 */
 	private int wordTest(String word){
 		int size = word.length();
@@ -224,14 +236,21 @@ public class Words {
 		
 	}
 	
-	// This method saves the last word that the user 
-	// has selected
+	
+	/*
+	 * This method saves the last word that the user
+	 * has selected.
+	 * @param lastWord The word to assign to lastWord variable
+	 */ 
 	public void setLastWord(String lastWord){
 		this.lastWord = lastWord;
 	}
 
-	// This method returns the last word that the user
-	// has selected
+	
+	/*
+	 * This method returns the last word that the user 
+	 * has selected
+	 */
 	public String getLastWord(){
 		return lastWord;
 	}
