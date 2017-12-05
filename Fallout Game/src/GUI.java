@@ -245,9 +245,10 @@ public class GUI extends JFrame {
 				refresh();
 				// Based on difficulty selected, will display the amount of words and letters to guess
 				if ((String)difficultySelectionBox.getSelectedItem() == "1 (Very Easy)") {
-					// 
+					// Pass argument 1 into Words selecting Easy difficulty
 					gameWords = new Words(1);
 					
+					// Set 7 JLabels to have thw rods in the array
 					gameWord0.setText(gameWords.getWord(0));
 					centerPanel.add(gameWord0);
 					gameWord1.setText(gameWords.getWord(1));
@@ -265,8 +266,10 @@ public class GUI extends JFrame {
 					
 					lettersCorrect.setText("Guess the 4 letter word");
 				} else if ((String)difficultySelectionBox.getSelectedItem() == "2 (Easy)") {
+					// Pass argument 2 into Words selecting Easy difficulty
 					gameWords = new Words(2);
 					
+					// Set 9 JLabels to have the words in the array
 					gameWord0.setText(gameWords.getWord(0));
 					centerPanel.add(gameWord0);
 					gameWord1.setText(gameWords.getWord(1));
@@ -288,8 +291,10 @@ public class GUI extends JFrame {
 					
 					lettersCorrect.setText("Guess the 5 letter word");
 				} else if ((String)difficultySelectionBox.getSelectedItem() == "3 (Normal)") {
+					// Pass argument 3 into Words selecting Normal Difficulty
 					gameWords = new Words(3);
 					
+					// Set 11 JLabels to have the words in the array
 					gameWord0.setText(gameWords.getWord(0));
 					centerPanel.add(gameWord0);
 					gameWord1.setText(gameWords.getWord(1));
@@ -315,9 +320,10 @@ public class GUI extends JFrame {
 					
 					lettersCorrect.setText("Guess the 6 letter word");
 				} else if ((String)difficultySelectionBox.getSelectedItem() == "4 (Hard)") {
+					// Pass argument 4 into Words selecting Hard Difficulty
 					gameWords = new Words(4);
 					
-					
+					// Set 13 JLabels to have the words in the array
 					gameWord0.setText(gameWords.getWord(0));
 					centerPanel.add(gameWord0);
 					gameWord1.setText(gameWords.getWord(1));
@@ -347,8 +353,10 @@ public class GUI extends JFrame {
 					
 					lettersCorrect.setText("Guess the 7 letter word");
 				} else if ((String)difficultySelectionBox.getSelectedItem() == "5 (Very Hard)") {
+					// Pass argument 5 into Words selecting Very Hard Difficulty
 					gameWords = new Words(5);
 					
+					// Set 15 JLabels to have the words in the array
 					gameWord0.setText(gameWords.getWord(0));
 					centerPanel.add(gameWord0);
 					gameWord1.setText(gameWords.getWord(1));
@@ -384,21 +392,23 @@ public class GUI extends JFrame {
 				}
 				refresh();
 			} else if (event.getSource() == guessHereTextField) {
+				// Takes the guess and checks it
 				gameWords.guessTaken();
 				String userGuess = guessHereTextField.getText();
 				guessHereTextField.setText("");
 				gameWords.checkMatches(userGuess);
 				if (gameWords.checkMatches(userGuess) == 999) {
+					// If the user guessed the right answer, increase the score and go to end screen
 					gameWords.increaseTotalScore();
 					
+					// Center panel to say you won
 					centerPanel.removeAll();
 					centerPanel.setLayout(new GridLayout(1,1));
 					JLabel youWin = new JLabel ("You were successful!");
-					youWin.setHorizontalAlignment(JLabel.CENTER);
-					youWin.setFont(new Font("Helvetica", Font.PLAIN, 36));
-					youWin.setForeground(Color.green);
+					greenTextCenterAlign(youWin, 36);
 					centerPanel.add(youWin);
 					
+					// Bottom panel to give option to go to opening screen or exit
 					southPanel.removeAll();
 					southPanel.setLayout(new GridLayout(1,2));
 					southPanel.add(returnToOpeningScreen);
@@ -420,7 +430,7 @@ public class GUI extends JFrame {
 				} else if (gameWords.checkMatches(userGuess) == 7) {
 					lettersCorrect.setText("You got 7 letters correct");
 				}
-				//
+				// Changes the text to guesses left
 				if (gameWords.getGuessesLeft() == 3) {
 					numberOfGuessesRemaining.setText("Guesses Remaining: 3");
 					numberOfGuessesRemaining.setForeground(Color.yellow);
@@ -431,6 +441,9 @@ public class GUI extends JFrame {
 					numberOfGuessesRemaining.setText("Guesses Remaining: 1");
 					numberOfGuessesRemaining.setForeground(Color.red);
 				} else if (gameWords.getGuessesLeft() == 0 && gameWords.checkMatches(userGuess) != 999) {
+					// If you have no more guesses and you didn't win, go to end game loss screen
+					
+					// Unsuccessfuly center panel
 					centerPanel.removeAll();
 					centerPanel.setLayout(new GridLayout(1,1));
 					JLabel youLose = new JLabel ("You were unsucessful!");
@@ -439,6 +452,7 @@ public class GUI extends JFrame {
 					youLose.setForeground(Color.red);
 					centerPanel.add(youLose);
 					
+					// Buttons to return to opening menu or quit
 					southPanel.removeAll();
 					southPanel.setLayout(new GridLayout(1,2));
 					southPanel.add(returnToOpeningScreen);
