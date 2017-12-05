@@ -12,7 +12,7 @@ public class Words {
 	private int amountOfGuesses;
 	private static int totalScore;
 	private ArrayList<String> listOfWords = new ArrayList<>();
-	private String lastWord;
+	private ArrayList<String> lastWord = new ArrayList<>();
 	
 	/*
 	 * Loads a random set of words into an ArrayList. The length of words and
@@ -243,15 +243,16 @@ public class Words {
 	 * @param lastWord The word to assign to lastWord variable
 	 */ 
 	public void setLastWord(String lastWord){
-		this.lastWord = lastWord;
+		this.lastWord.add(lastWord);
+		return;
 	}
 
 	
 	/*
-	 * This method returns the last word that the user 
-	 * has selected
+	 * @return Gets the string from the last word ArrayList
+	 * @param index of the Last Word you want to return
 	 */
-	public String getLastWord(){
-		return lastWord;
+	public String getLastWord(int index){
+		return lastWord.get(index);
 	}
 }

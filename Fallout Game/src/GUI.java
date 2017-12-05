@@ -13,8 +13,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class GUI extends JFrame {
-	// Objects declared here for use such as JButtons, JLabels, JTextField, and JComboBox
-	
 	// Panels of North Center and South regions of the GUI, will be manipulated throughout game
 	private JPanel northPanel;
 	private JPanel centerPanel;
@@ -24,7 +22,7 @@ public class GUI extends JFrame {
 	private JLabel gameTitle;
 	
 	// Objects for the Opening Screen of the Game
-	private JLabel score;	// Keeps score
+	private JLabel openingScreenScore;	// Keeps score
 	private JButton openingScreenStartGame;	// Button to Difficulty Selection screen
 	private JButton openingScreenHowToPlay;	// Button to How to Play screen
 	
@@ -40,7 +38,7 @@ public class GUI extends JFrame {
 	private Words gameWords;		// Declares gameWords (Game Logic of the program) **Use of composition here**
 	private JLabel numberOfGuessesRemaining;	// Notifys the user of how many guesses left
 	private JLabel lettersCorrect;	// Notifys the user of how many letters they got correct
-	private JLabel guessHereLabel;	// Notifys the user to type in their guess in guessHereTextField
+	private JLabel guessHereLastWord;	// Notifys the user to type in their guess in guessHereTextField
 	private JTextField guessHereTextField;	// Textfield where the user will put in their guess
 	
 	// Objects end of game Screen
@@ -61,15 +59,15 @@ public class GUI extends JFrame {
 		centerPanel.setLayout(new GridLayout(1, 1));
 		southPanel.setLayout(new GridLayout(1, 2));
 		
-		// Game Title
+		// Game Title (will be staying at the top on every screen)
 		gameTitle = new JLabel("Fallout Hacking Game");
 		whiteTextCenterAlign(gameTitle, 36);
 		northPanel.add(gameTitle);
 		
 		// Score Label for Opening Screen
-		score = new JLabel("Score: 0");
-		greenTextCenterAlign(score, 24);
-		centerPanel.add(score);
+		openingScreenScore = new JLabel("Score: 0");
+		greenTextCenterAlign(openingScreenScore, 24);
+		centerPanel.add(openingScreenScore);
 		
 		// Start Game and How to Play Buttons for Opening Screen
 		openingScreenStartGame = new JButton("Start Game");
@@ -96,11 +94,9 @@ public class GUI extends JFrame {
 		whiteTextCenterAlign(lettersCorrect, 16);
 		guessHereTextField = new JTextField();
 		
-		//TODO: Implement the last word guessed by
-		guessHereLabel = new JLabel("Enter your guess here:");
-		guessHereLabel.setHorizontalAlignment(JLabel.CENTER);
-		guessHereLabel.setFont(new Font("Helvetica", Font.PLAIN, 16));
-		guessHereLabel.setForeground(Color.white);
+		// Notify the user to guess here and notifies last words guessed
+		guessHereLastWord = new JLabel("Enter your guess here:");
+		whiteTextCenterAlign(guessHereLastWord, 16);
 		
 		// Quit Button
 		exitGame = new JButton("Quit Game");
@@ -182,8 +178,8 @@ public class GUI extends JFrame {
 				centerPanel.removeAll();
 				centerPanel.setLayout(new GridLayout(1, 1));
 				int addScore = gameWords.getTotalScore();
-				score.setText("Score: " + Integer.toString(addScore));
-				centerPanel.add(score);
+				openingScreenScore.setText("Score: " + Integer.toString(addScore));
+				centerPanel.add(openingScreenScore);
 				// Remove south panel button and replaced with "Start Game" and "How to Play"
 				southPanel.removeAll();
 				southPanel.setLayout(new GridLayout(1, 2));
@@ -228,7 +224,7 @@ public class GUI extends JFrame {
 				numberOfGuessesRemaining.setText("Guesses remaining: 4");
 				numberOfGuessesRemaining.setHorizontalAlignment(JLabel.CENTER);
 				numberOfGuessesRemaining.setFont(new Font("Helvetica", Font.PLAIN, 16));
-				numberOfGuessesRemaining.setForeground(Color.blue);
+				numberOfGuessesRemaining.setForeground(Color.cyan);
 				
 				// Remove center panel Label to replace with guessing words
 				centerPanel.removeAll();
@@ -239,19 +235,15 @@ public class GUI extends JFrame {
 				
 				// I set the layout to be 4,2 instead of 2,2
 				//                              ----Ruida Shen
-				southPanel.setLayout(new GridLayout(4, 2));
+				southPanel.setLayout(new GridLayout(2, 2));
 				southPanel.add(numberOfGuessesRemaining);
 				southPanel.add(lettersCorrect);
-				southPanel.add(guessHereLabel);
+				southPanel.add(guessHereLastWord);
 				southPanel.add(guessHereTextField);
 				
-				// A JLabel indicates the last word inputed by user
-				JLabel lastSelectedLabel = new JLabel();
-				lastSelectedLabel.setText("last word selected: ");
-				lastSelectedLabel.setHorizontalAlignment(JLabel.CENTER);
-				lastSelectedLabel.setFont(new Font("Helvetica", Font.PLAIN, 16));
-				lastSelectedLabel.setForeground(Color.white);
-				southPanel.add(lastSelectedLabel);
+				
+				guessHereLastWord.setText("Enter your guess here:");
+				whiteTextCenterAlign(guessHereLastWord, 14);
 				
 				refresh();
 				// Based on difficulty selected, will display the amount of words and letters to guess
@@ -275,7 +267,7 @@ public class GUI extends JFrame {
 					gameWord6.setText(gameWords.getWord(6));
 					centerPanel.add(gameWord6);
 					
-					lettersCorrect.setText("Guess the 4 letter word");
+					lettersCorrect.setText("Guess the 4 - 5 letter word");
 				} else if ((String)difficultySelectionBox.getSelectedItem() == "2 (Easy)") {
 					// Pass argument 2 into Words selecting Easy difficulty
 					gameWords = new Words(2);
@@ -300,7 +292,7 @@ public class GUI extends JFrame {
 					gameWord8.setText(gameWords.getWord(8));
 					centerPanel.add(gameWord8);
 					
-					lettersCorrect.setText("Guess the 5 letter word");
+					lettersCorrect.setText("Guess the 5 - 6 letter word");
 				} else if ((String)difficultySelectionBox.getSelectedItem() == "3 (Normal)") {
 					// Pass argument 3 into Words selecting Normal Difficulty
 					gameWords = new Words(3);
@@ -329,7 +321,7 @@ public class GUI extends JFrame {
 					gameWord10.setText(gameWords.getWord(10));
 					centerPanel.add(gameWord10);
 					
-					lettersCorrect.setText("Guess the 6 letter word");
+					lettersCorrect.setText("Guess the 6 - 7 letter word");
 				} else if ((String)difficultySelectionBox.getSelectedItem() == "4 (Hard)") {
 					// Pass argument 4 into Words selecting Hard Difficulty
 					gameWords = new Words(4);
@@ -362,7 +354,7 @@ public class GUI extends JFrame {
 					gameWord12.setText(gameWords.getWord(12));
 					centerPanel.add(gameWord12);
 					
-					lettersCorrect.setText("Guess the 7 letter word");
+					lettersCorrect.setText("Guess the 7 - 8 letter word");
 				} else if ((String)difficultySelectionBox.getSelectedItem() == "5 (Very Hard)") {
 					// Pass argument 5 into Words selecting Very Hard Difficulty
 					gameWords = new Words(5);
@@ -399,7 +391,7 @@ public class GUI extends JFrame {
 					gameWord14.setText(gameWords.getWord(14));
 					centerPanel.add(gameWord14);
 					
-					lettersCorrect.setText("Guess the 8 letter word");
+					lettersCorrect.setText("Guess the 8 - 9 letter word");
 				}
 				refresh();
 			} else if (event.getSource() == guessHereTextField) {
@@ -407,15 +399,11 @@ public class GUI extends JFrame {
 				gameWords.guessTaken();
 				String userGuess = guessHereTextField.getText();
 				
+				//TODO:
 				//displays user's last input
-				gameWords.setLastWord(userGuess);
-				JLabel lastSelectedWord = new JLabel();
-				lastSelectedWord.setText(gameWords.getLastWord());
-				lastSelectedWord.setHorizontalAlignment(JLabel.CENTER);
-				lastSelectedWord.setFont(new Font("Helvetica", Font.PLAIN, 16));
-				lastSelectedWord.setForeground(Color.red);
-				southPanel.add(lastSelectedWord);
+				String lastWordEntered = "";
 				
+				// Emptys the guess textfield after the user guesses
 				guessHereTextField.setText("");
 				gameWords.checkMatches(userGuess);
 				if (gameWords.checkMatches(userGuess) == 999) {
@@ -451,20 +439,44 @@ public class GUI extends JFrame {
 				} else if (gameWords.checkMatches(userGuess) == 7) {
 					lettersCorrect.setText("You got 7 letters correct");
 				}
-				// Changes the text to guesses left
+				
+				// Changes the text to guesses left and displays the previous guessed words
 				if (gameWords.getGuessesLeft() == 3) {
+					// Sets guesses remaining to 3 and yellow
 					numberOfGuessesRemaining.setText("Guesses Remaining: 3");
 					numberOfGuessesRemaining.setForeground(Color.yellow);
+					
+					// Displays the last word guessed to crossed out gray
+					guessHereLastWord.setForeground(Color.gray);
+					gameWords.setLastWord(userGuess);
+					lastWordEntered = ("<html><strike>" + gameWords.getLastWord(0) + "</strike></html>");
+					guessHereLastWord.setText(lastWordEntered);
+					
 				} else if (gameWords.getGuessesLeft() == 2) {
+					// Sets guesses remaining to 2 and orange
 					numberOfGuessesRemaining.setText("Guesses Remaining: 2");
 					numberOfGuessesRemaining.setForeground(Color.orange);
+					
+					// Displays the last 2 words guessed to crossed out gray
+					guessHereLastWord.setForeground(Color.gray);
+					gameWords.setLastWord(userGuess);
+					lastWordEntered = ("<html><strike>" + gameWords.getLastWord(0) + ", " + gameWords.getLastWord(1) + "</strike></html>");
+					guessHereLastWord.setText(lastWordEntered);
 				} else if (gameWords.getGuessesLeft() == 1) {
+					// Sets guesses remaining to 1 and red
 					numberOfGuessesRemaining.setText("Guesses Remaining: 1");
 					numberOfGuessesRemaining.setForeground(Color.red);
+					
+					// Displays the last 3 words guessed to crossed out gray
+					guessHereLastWord.setForeground(Color.gray);
+					gameWords.setLastWord(userGuess);
+					lastWordEntered = ("<html><strike>" + gameWords.getLastWord(0) + ", " + gameWords.getLastWord(1) + ", " + gameWords.getLastWord(2) + "</strike></html>");
+					guessHereLastWord.setText(lastWordEntered);
+					
 				} else if (gameWords.getGuessesLeft() == 0 && gameWords.checkMatches(userGuess) != 999) {
 					// If you have no more guesses and you didn't win, go to end game loss screen
 					
-					// Unsuccessfuly center panel
+					// Unsuccessfully center panel
 					centerPanel.removeAll();
 					centerPanel.setLayout(new GridLayout(1,1));
 					JLabel youLose = new JLabel ("You were unsucessful!");
