@@ -160,4 +160,45 @@ public class Words {
 		return listOfWords;
 	}
 	
+	private int wordTest(String word){ //returns how difficult a word will be based on length and repeated characters
+		int size = word.length();
+		int sameLetters = 0;
+		int difficulty;
+		
+		for(int i= 0; i < size - 1; i ++) {
+			if(word.indexOf(i) == word.indexOf(i+1)){
+				break;
+			}
+			else{
+				sameLetters++;
+			}
+		}
+		
+		difficulty = size - sameLetters;
+		
+		if(difficulty > 5){ //make 5 the greatest difficulty;
+			return 5;
+		}
+		else{
+			return difficulty;
+		}
+		
+	}
+	
+	private String getSymbols(int length){
+		
+		char[] list = {'!','@','#','$','%','^','&','*','(',')'};
+		String myString = "";
+		Random rand = new Random();
+		
+		for(int i = 0; i < length; i++){
+			myString += list[rand.nextInt()+list.length];
+		}
+		
+		
+		return myString;
+		
+	}
+
+	
 }
