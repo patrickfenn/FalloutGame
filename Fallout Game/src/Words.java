@@ -56,7 +56,7 @@ public class Words {
 			    while (sc.hasNextLine() && listOfWords.size()<numOfWords && found == false) {
 			        String line = sc.nextLine();
 			        count++;
-					if (line.length()==wordSize && count>=lineToRead-300 && count<=lineToRead+300) {
+					if (line.length()==wordSize+rand.nextInt(2) && count>=lineToRead-300 && count<=lineToRead+300) {
 						listOfWords.add(line);	
 						found = true;
 					}
