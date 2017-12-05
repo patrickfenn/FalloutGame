@@ -9,14 +9,22 @@ public class Words {
 	
 	private String answer;
 	private int numOfWords;
+	private int amountOfGuesses;
+	private static int totalScore;
 	private ArrayList<String> listOfWords = new ArrayList<>();
-	
+	private ArrayList<String> lastWord = new ArrayList<>();
 	
 	/*
+	 * Loads a random set of words into an ArrayList. The length of words and
+	 * the number of words is based on the difficulty.
 	 * @param difficulty The level of difficulty (1-5) that the player will choose.
 	 */
 	public Words(int difficulty) {
+		// Amount of guess default to 4
+		amountOfGuesses = 4;
 		int wordSize = 0;
+		
+		// Set game difficulty based on constructor argument
 		if (difficulty==1) {
 			numOfWords=7;
 			wordSize=4;
@@ -39,26 +47,37 @@ public class Words {
 		}
 		
 		Random rand = new Random();
-		Path file = Paths.get("src/enable1.txt");
 		FileInputStream inputStream = null;
 		Scanner sc = null;
 		try {
 		   while (listOfWords.size() < numOfWords) {
+			   // Open file
 				inputStream = new FileInputStream("src/enable1.txt");
 			    sc = new Scanner(inputStream, "UTF-8");
+			    
+			    // Pick a line in the file
 			    int lineToRead = rand.nextInt(172819);
 			    int count = 0;
 			    boolean found = false;
+			    
+			    // This while loops checks if the file has a next line, if listOfWords is
+			    // less than the number of words needed, and if the next word hasn't
+			    // yet been found.
 			    while (sc.hasNextLine() && listOfWords.size()<numOfWords && found == false) {
 			        String line = sc.nextLine();
 			        count++;
-					if (line.length()==wordSize && count>=lineToRead-300 && count<=lineToRead+300) {
+			        
+			        // If the current line is within a range of 600 of the target line, and
+			        // matches the number of characters, add it to the list
+					if (line.length()==wordSize+rand.nextInt(2) && count>=lineToRead-300 && count<=lineToRead+300) {
 						listOfWords.add(line);	
 						found = true;
 					}
 				}
 		   }
 	
+		   
+		  // A bunch of error handling and the inputstream/scanner closing.
 		    if (sc.ioException() != null) {
 		        throw sc.ioException();
 		    }
@@ -79,8 +98,9 @@ public class Words {
 		    }
 		}
 		
+		// pick a random word from the word list for the answer.
 		int index = rand.nextInt(numOfWords);
-		answer = listOfWords.get(2);
+		answer = listOfWords.get(index);
 		
 	}// end of constructor
 	
@@ -104,17 +124,74 @@ public class Words {
 	 */
 	public int checkMatches(String guess) { 
 		int matches = 0;
-		if (guess==answer)
-			return 999;
-		 
-		for (int i = 0; i < answer.length() && i < guess.length(); i++)
-			if (guess.charAt(i) == answer.charAt(i))
+		for (int i = 0; i < answer.length() && i < guess.length(); i++) {
+			if (guess.charAt(i) == answer.charAt(i)) {
 				matches++;
-	
+				if (matches == answer.length()) {
+					return 999;
+				}
+			}
+		}
 		return matches;
 	}
-
-	private int wordTest(String word){ //returns how difficult a word will be based on length and repeated characters
+	
+	
+	/*
+	 * Increase the total score according to difficulty:
+	 * 1: +20
+	 * 2: +30
+	 * 3: +40
+	 * 4: +50
+	 * 5: +60
+	 */
+	public void increaseTotalScore() {
+		if (numOfWords == 7) {
+			totalScore += 20;
+		} else if (numOfWords == 9) {
+			totalScore += 30;
+		} else if (numOfWords == 11) {
+			totalScore += 40;
+		} else if (numOfWords == 13) {
+			totalScore += 50;
+		} else if (numOfWords == 15) {
+			totalScore += 60;
+		}
+		return;
+	}
+	
+	
+	/*
+	 * @return Returns totalScore;
+	 */
+	public int getTotalScore() {
+		return totalScore;
+	}
+	
+	/*
+	 * @param index The index that will be returned from the list of words
+	 * @return returns a String from the index argument
+	 */
+	public String getWord(int index) {
+		return listOfWords.get(index);
+	}
+	
+	public void guessTaken() {
+		amountOfGuesses--;
+		return;
+	}
+	/*
+	 * @return Returns the amount of guesses left
+	 */
+	public int getGuessesLeft() {
+		return amountOfGuesses;
+	}
+	
+	
+	/*
+	 * @return How difficult a word will be based on length and repeated characters
+	 * @param word The word to analyze
+	 */
+	private int wordTest(String word){
 		int size = word.length();
 		int sameLetters = 0;
 		int difficulty;
@@ -139,5 +216,44 @@ public class Words {
 		
 	}
 	
+	
+	/*
+	 * @return A string of random symbols
+	 * @param length The number of symbols to return.
+	 */
+	private String getSymbols(int length){
+		
+		char[] list = {'!','@','#','$','%','^','&','*','(',')'};
+		String myString = "";
+		Random rand = new Random();
+		
+		for(int i = 0; i < length; i++){
+			myString += list[rand.nextInt()+list.length];
+		}
+		
+		
+		return myString;
+		
+	}
+	
+	
+	/*
+	 * This method saves the last word that the user
+	 * has selected.
+	 * @param lastWord The word to assign to lastWord variable
+	 */ 
+	public void setLastWord(String lastWord){
+		this.lastWord.add(lastWord);
+		return;
+	}
 
+	
+	/*
+	 * @return Gets the string from the last word ArrayList
+	 * @param index of the Last Word you want to return
+	 */
+	public String getLastWord(int index){
+		return lastWord.get(index);
+	}
 }
+
