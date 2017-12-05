@@ -18,6 +18,7 @@ public class Words {
 	 * @param difficulty The level of difficulty (1-5) that the player will choose.
 	 */
 	public Words(int difficulty) {
+		// Amount of guess default to 4
 		amountOfGuesses = 4;
 		int wordSize = 0;
 		if (difficulty==1) {
@@ -141,23 +142,23 @@ public class Words {
 		return totalScore;
 	}
 	
+	/*
+	 * @param index The index that will be returned from the list of words
+	 * @return returns a String from the index argument
+	 */
+	public String getWord(int index) {
+		return listOfWords.get(index);
+	}
 	
 	public void guessTaken() {
 		amountOfGuesses--;
+		return;
 	}
 	/*
 	 * @return Returns the amount of guesses left
 	 */
 	public int getGuessesLeft() {
 		return amountOfGuesses;
-	}
-	
-	
-	/*
-	 * @return Returns the arraylist
-	 */
-	public ArrayList<String> getWordList() {
-		return listOfWords;
 	}
 	
 }
