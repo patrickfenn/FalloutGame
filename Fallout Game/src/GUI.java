@@ -236,11 +236,22 @@ public class GUI extends JFrame {
 				
 				// Remove south panel buttons to replace with game buttons
 				southPanel.removeAll();
-				southPanel.setLayout(new GridLayout(2, 2));
+				
+				// I set the layout to be 4,2 instead of 2,2
+				//                              ----Ruida Shen
+				southPanel.setLayout(new GridLayout(4, 2));
 				southPanel.add(numberOfGuessesRemaining);
 				southPanel.add(lettersCorrect);
 				southPanel.add(guessHereLabel);
 				southPanel.add(guessHereTextField);
+				
+				// A JLabel indicates the last word inputed by user
+				JLabel lastSelectedLabel = new JLabel();
+				lastSelectedLabel.setText("last word selected: ");
+				lastSelectedLabel.setHorizontalAlignment(JLabel.CENTER);
+				lastSelectedLabel.setFont(new Font("Helvetica", Font.PLAIN, 16));
+				lastSelectedLabel.setForeground(Color.white);
+				southPanel.add(lastSelectedLabel);
 				
 				refresh();
 				// Based on difficulty selected, will display the amount of words and letters to guess
@@ -395,6 +406,16 @@ public class GUI extends JFrame {
 				// Takes the guess and checks it
 				gameWords.guessTaken();
 				String userGuess = guessHereTextField.getText();
+				
+				//displays user's last input
+				gameWords.setLastWord(userGuess);
+				private JLabel lastSelectedWord = new JLabel();
+				lastSelectedWord.setText(gameWords.getLastWord());
+				lastSelectedWord.setHorizontalAlignment(JLabel.CENTER);
+				lastSelectedWord.setFont(new Font("Helvetica", Font.PLAIN, 16));
+				lastSelectedWord.setForeground(Color.red);
+				southPanel.add(lastSelectedWord);
+				
 				guessHereTextField.setText("");
 				gameWords.checkMatches(userGuess);
 				if (gameWords.checkMatches(userGuess) == 999) {
