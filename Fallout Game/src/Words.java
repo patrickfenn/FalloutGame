@@ -256,4 +256,3 @@ public class Words {
 		return lastWord.get(index);
 	}
 }
-
