@@ -21,6 +21,8 @@ public class Words {
 		// Amount of guess default to 4
 		amountOfGuesses = 4;
 		int wordSize = 0;
+		
+		// Set game difficulty based on constructor argument
 		if (difficulty==1) {
 			numOfWords=7;
 			wordSize=4;
@@ -43,19 +45,28 @@ public class Words {
 		}
 		
 		Random rand = new Random();
-		Path file = Paths.get("src/enable1.txt");
 		FileInputStream inputStream = null;
 		Scanner sc = null;
 		try {
 		   while (listOfWords.size() < numOfWords) {
+			   // Open file
 				inputStream = new FileInputStream("src/enable1.txt");
 			    sc = new Scanner(inputStream, "UTF-8");
+			    
+			    // Pick a line in the file
 			    int lineToRead = rand.nextInt(172819);
 			    int count = 0;
 			    boolean found = false;
+			    
+			    // This while loops checks if the file has a next line, if listOfWords is
+			    // less than the number of words needed, and if the next word hasn't
+			    // yet been found.
 			    while (sc.hasNextLine() && listOfWords.size()<numOfWords && found == false) {
 			        String line = sc.nextLine();
 			        count++;
+			        
+			        // If the current line is within a range of 600 of the target line, and
+			        // matches the number of characters, add it to the list
 					if (line.length()==wordSize+rand.nextInt(2) && count>=lineToRead-300 && count<=lineToRead+300) {
 						listOfWords.add(line);	
 						found = true;
@@ -63,6 +74,8 @@ public class Words {
 				}
 		   }
 	
+		   
+		  // A bunch of error handling and the inputstream/scanner closing.
 		    if (sc.ioException() != null) {
 		        throw sc.ioException();
 		    }
@@ -83,6 +96,7 @@ public class Words {
 		    }
 		}
 		
+		// pick a random word from the word list for the answer.
 		int index = rand.nextInt(numOfWords);
 		answer = listOfWords.get(index);
 		
@@ -161,7 +175,11 @@ public class Words {
 		return amountOfGuesses;
 	}
 	
-	private int wordTest(String word){ //returns how difficult a word will be based on length and repeated characters
+	
+	/*
+	 * @return how difficult a word will be based on length and repeated characters
+	 */
+	private int wordTest(String word){
 		int size = word.length();
 		int sameLetters = 0;
 		int difficulty;
@@ -186,6 +204,11 @@ public class Words {
 		
 	}
 	
+	
+	/*
+	 * @return A string of random symbols
+	 * @param length The number of symbols to return.
+	 */
 	private String getSymbols(int length){
 		
 		char[] list = {'!','@','#','$','%','^','&','*','(',')'};
