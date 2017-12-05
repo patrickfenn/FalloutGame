@@ -242,7 +242,7 @@ public class Words {
 	 * has selected.
 	 * @param lastWord The word to assign to lastWord variable
 	 */ 
-	public void setLastWord(String lastWord){
+	public void addLastWord(String lastWord){
 		this.lastWord.add(lastWord);
 		return;
 	}
@@ -256,4 +256,3 @@ public class Words {
 		return lastWord.get(index);
 	}
 }
-
