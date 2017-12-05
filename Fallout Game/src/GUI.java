@@ -409,7 +409,7 @@ public class GUI extends JFrame {
 				
 				//displays user's last input
 				gameWords.setLastWord(userGuess);
-				private JLabel lastSelectedWord = new JLabel();
+				JLabel lastSelectedWord = new JLabel();
 				lastSelectedWord.setText(gameWords.getLastWord());
 				lastSelectedWord.setHorizontalAlignment(JLabel.CENTER);
 				lastSelectedWord.setFont(new Font("Helvetica", Font.PLAIN, 16));
