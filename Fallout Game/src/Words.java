@@ -12,7 +12,7 @@ public class Words {
 	private int amountOfGuesses;
 	private static int totalScore;
 	private ArrayList<String> listOfWords = new ArrayList<>();
-	
+	private String lastWord;
 	
 	/*
 	 * @param difficulty The level of difficulty (1-5) that the player will choose.
@@ -222,5 +222,17 @@ public class Words {
 		
 		return myString;
 		
-}
+	}
+	
+	// This method saves the last word that the user 
+	// has selected
+	public void setLastWord(String lastWord){
+		this.lastWord = lastWord;
+	}
+
+	// This method returns the last word that the user
+	// has selected
+	public String getLastWord(){
+		return lastWord;
+	}
 }
