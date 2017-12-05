@@ -133,6 +133,7 @@ public class GUI extends JFrame {
 				southPanel.add(difficultySelectionButton);
 				
 				refresh();
+				
 			} else if (event.getSource() == openingScreenHowToPlay) {
 				northPanel.setLayout(new GridLayout(6, 1));
 				// TextLabel instructions for the game
@@ -169,6 +170,7 @@ public class GUI extends JFrame {
 				southPanel.add(returnToOpeningScreen);
 				
 				refresh();
+				
 			} else if (event.getSource() == returnToOpeningScreen){
 				// Remove north panel text and replaced with "Fallout Hacking Game"
 				northPanel.removeAll();
@@ -187,6 +189,7 @@ public class GUI extends JFrame {
 				southPanel.add(openingScreenHowToPlay);
 				
 				refresh();
+				
 			} else if (event.getSource() == difficultySelectionButton) {
 				// JLabel wordlist Objects
 				JLabel gameWord0 = new JLabel("");
@@ -232,20 +235,17 @@ public class GUI extends JFrame {
 				
 				// Remove south panel buttons to replace with game buttons
 				southPanel.removeAll();
-				
-				// I set the layout to be 4,2 instead of 2,2
-				//                              ----Ruida Shen
 				southPanel.setLayout(new GridLayout(2, 2));
 				southPanel.add(numberOfGuessesRemaining);
 				southPanel.add(lettersCorrect);
 				southPanel.add(guessHereLastWord);
 				southPanel.add(guessHereTextField);
 				
-				
 				guessHereLastWord.setText("Enter your guess here:");
 				whiteTextCenterAlign(guessHereLastWord, 14);
 				
 				refresh();
+				
 				// Based on difficulty selected, will display the amount of words and letters to guess
 				if ((String)difficultySelectionBox.getSelectedItem() == "1 (Very Easy)") {
 					// Pass argument 1 into Words selecting Easy difficulty
@@ -268,6 +268,7 @@ public class GUI extends JFrame {
 					centerPanel.add(gameWord6);
 					
 					lettersCorrect.setText("Guess the 4 - 5 letter word");
+					
 				} else if ((String)difficultySelectionBox.getSelectedItem() == "2 (Easy)") {
 					// Pass argument 2 into Words selecting Easy difficulty
 					gameWords = new Words(2);
@@ -293,6 +294,7 @@ public class GUI extends JFrame {
 					centerPanel.add(gameWord8);
 					
 					lettersCorrect.setText("Guess the 5 - 6 letter word");
+					
 				} else if ((String)difficultySelectionBox.getSelectedItem() == "3 (Normal)") {
 					// Pass argument 3 into Words selecting Normal Difficulty
 					gameWords = new Words(3);
@@ -322,6 +324,7 @@ public class GUI extends JFrame {
 					centerPanel.add(gameWord10);
 					
 					lettersCorrect.setText("Guess the 6 - 7 letter word");
+					
 				} else if ((String)difficultySelectionBox.getSelectedItem() == "4 (Hard)") {
 					// Pass argument 4 into Words selecting Hard Difficulty
 					gameWords = new Words(4);
@@ -355,6 +358,7 @@ public class GUI extends JFrame {
 					centerPanel.add(gameWord12);
 					
 					lettersCorrect.setText("Guess the 7 - 8 letter word");
+					
 				} else if ((String)difficultySelectionBox.getSelectedItem() == "5 (Very Hard)") {
 					// Pass argument 5 into Words selecting Very Hard Difficulty
 					gameWords = new Words(5);
@@ -392,14 +396,15 @@ public class GUI extends JFrame {
 					centerPanel.add(gameWord14);
 					
 					lettersCorrect.setText("Guess the 8 - 9 letter word");
+					
 				}
 				refresh();
+				
 			} else if (event.getSource() == guessHereTextField) {
 				// Takes the guess and checks it
 				gameWords.guessTaken();
 				String userGuess = guessHereTextField.getText();
 				
-				//TODO:
 				//displays user's last input
 				String lastWordEntered = "";
 				
@@ -462,6 +467,7 @@ public class GUI extends JFrame {
 					gameWords.setLastWord(userGuess);
 					lastWordEntered = ("<html><strike>" + gameWords.getLastWord(0) + ", " + gameWords.getLastWord(1) + "</strike></html>");
 					guessHereLastWord.setText(lastWordEntered);
+					
 				} else if (gameWords.getGuessesLeft() == 1) {
 					// Sets guesses remaining to 1 and red
 					numberOfGuessesRemaining.setText("Guesses Remaining: 1");
@@ -492,7 +498,9 @@ public class GUI extends JFrame {
 					southPanel.add(exitGame);
 					
 				}
+				
 				refresh();
+				
 			} else if (event.getSource() == exitGame) {
 				System.exit(0);
 			}
