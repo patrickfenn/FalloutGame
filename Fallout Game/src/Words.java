@@ -137,7 +137,27 @@ public class Words {
 		return matches;
 	}
 	
-	
+	/**
+	 * @return The index of which the word was guessed in
+	 * @param guess The word selecete by the user to guess
+	 */
+	public int getIndex(String guess) {
+		int matches;
+		for (int word = 0; word < (numOfWords - 1); word++) {
+			matches = 0;
+			for (int letter = 0; letter < listOfWords.get(word).length() && letter < guess.length(); letter++) {
+				if (guess.charAt(letter) == listOfWords.get(word).charAt(letter)) {
+					matches++;
+					if (matches == guess.length()) {
+						return word;
+					}
+				}
+			}
+		}
+		return -1;
+	}
+
+  
 	/**
 	 * Increase the total score according to difficulty:
 	 * 1: +20
@@ -235,7 +255,7 @@ public class Words {
 			return difficulty;
 		}
 		
-	}
+}
 	/**
 	 * This method saves the last word that the user
 	 * has selected.

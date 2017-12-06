@@ -35,7 +35,7 @@ public class GUI extends JFrame {
 	private JButton difficultySelectionButton;	// Start game after difficulty is selected
 	
 	// Objects for the Gameplay Screen
-	private Words gameWords;		// Declares gameWords (Game Logic of the program) **Use of composition here**
+	private Words gameWords;		// Declares gameWords (Game Logic of the program)
 	private JLabel numberOfGuessesRemaining;	// Notifys the user of how many guesses left
 	private JLabel lettersCorrect;	// Notifys the user of how many letters they got correct
 	private JLabel guessHereLastWord;	// Notifys the user to type in their guess in guessHereTextField
@@ -43,6 +43,23 @@ public class GUI extends JFrame {
 	
 	// Objects end of game Screen
 	private JButton exitGame;	// Option to exit the program at the end of each game (Win or lose)
+	
+	// JLabel wordlist Objects
+	JLabel gameWord0;
+	JLabel gameWord1;
+	JLabel gameWord2;
+	JLabel gameWord3;
+	JLabel gameWord4;
+	JLabel gameWord5;
+	JLabel gameWord6;
+	JLabel gameWord7;
+	JLabel gameWord8;
+	JLabel gameWord9;
+	JLabel gameWord10;
+	JLabel gameWord11;
+	JLabel gameWord12;
+	JLabel gameWord13;
+	JLabel gameWord14;
 	
 	public GUI() {
 		super("CS31 Project");
@@ -93,6 +110,23 @@ public class GUI extends JFrame {
 		lettersCorrect = new JLabel("You got 0 letters Correct");
 		whiteTextCenterAlign(lettersCorrect, 16);
 		guessHereTextField = new JTextField();
+		
+		// JLabels for ArrayList of Words
+		gameWord0 = new JLabel("");
+		gameWord1 = new JLabel("");
+		gameWord2 = new JLabel("");
+		gameWord3 = new JLabel("");
+		gameWord4 = new JLabel("");
+		gameWord5 = new JLabel("");
+		gameWord6 = new JLabel("");
+		gameWord7 = new JLabel("");
+		gameWord8 = new JLabel("");
+		gameWord9 = new JLabel("");
+		gameWord10 = new JLabel("");
+		gameWord11 = new JLabel("");
+		gameWord12 = new JLabel("");
+		gameWord13 = new JLabel("");
+		gameWord14 = new JLabel("");
 		
 		// Notify the user to guess here and notifies last words guessed
 		guessHereLastWord = new JLabel("Enter your guess here:");
@@ -190,67 +224,6 @@ public class GUI extends JFrame {
 				refresh();
 				
 			} else if (event.getSource() == difficultySelectionButton) {
-				// JLabel wordlist Objects
-				Font myFont = new Font(Font.MONOSPACED, Font.BOLD, 14);
-				JLabel gameWord0 = new JLabel("");
-				greenTextCenterAlign(gameWord0, 14);
-				gameWord0.setFont(myFont);
-				JLabel gameWord1 = new JLabel("");
-				greenTextCenterAlign(gameWord1, 14);
-				gameWord1.setFont(myFont);
-
-				JLabel gameWord2 = new JLabel("");
-				greenTextCenterAlign(gameWord2, 14);
-				gameWord2.setFont(myFont);
-
-				JLabel gameWord3 = new JLabel("");
-				greenTextCenterAlign(gameWord3, 14);
-				gameWord3.setFont(myFont);
-
-				JLabel gameWord4 = new JLabel("");
-				greenTextCenterAlign(gameWord4, 14);
-				gameWord4.setFont(myFont);
-
-				JLabel gameWord5 = new JLabel("");
-				greenTextCenterAlign(gameWord5, 14);
-				gameWord5.setFont(myFont);
-
-				JLabel gameWord6 = new JLabel("");
-				greenTextCenterAlign(gameWord6, 14);
-				gameWord6.setFont(myFont);
-
-				JLabel gameWord7 = new JLabel("");
-				greenTextCenterAlign(gameWord7, 14);
-				gameWord7.setFont(myFont);
-
-				JLabel gameWord8 = new JLabel("");
-				greenTextCenterAlign(gameWord8, 14);
-				gameWord8.setFont(myFont);
-
-				JLabel gameWord9 = new JLabel("");
-				greenTextCenterAlign(gameWord9, 14);
-				gameWord9.setFont(myFont);
-
-				JLabel gameWord10 = new JLabel("");
-				greenTextCenterAlign(gameWord10, 14);
-				gameWord10.setFont(myFont);
-
-				JLabel gameWord11 = new JLabel("");
-				greenTextCenterAlign(gameWord11, 14);
-				gameWord11.setFont(myFont);
-
-				JLabel gameWord12 = new JLabel("");
-				greenTextCenterAlign(gameWord12, 14);
-				gameWord12.setFont(myFont);
-
-				JLabel gameWord13 = new JLabel("");
-				greenTextCenterAlign(gameWord13, 14);
-				gameWord13.setFont(myFont);
-
-				JLabel gameWord14 = new JLabel("");
-				greenTextCenterAlign(gameWord14, 14);
-				gameWord14.setFont(myFont);
-
 				
 				// Set the text to guesses remaining = 4
 				numberOfGuessesRemaining.setText("Guesses remaining: 4");
@@ -272,6 +245,39 @@ public class GUI extends JFrame {
 				
 				guessHereLastWord.setText("Enter your guess here:");
 				whiteTextCenterAlign(guessHereLastWord, 14);
+				
+				// Make the word list green
+				Font myFont = new Font(Font.MONOSPACED, Font.BOLD, 14);
+				greenTextCenterAlign(gameWord0, 14);
+				gameWord0.setFont(myFont);
+				greenTextCenterAlign(gameWord1, 14);
+				gameWord1.setFont(myFont);
+				greenTextCenterAlign(gameWord2, 14);
+				gameWord2.setFont(myFont);
+				greenTextCenterAlign(gameWord3, 14);
+				gameWord3.setFont(myFont);
+				greenTextCenterAlign(gameWord4, 14);
+				gameWord4.setFont(myFont);
+				greenTextCenterAlign(gameWord5, 14);
+				gameWord5.setFont(myFont);
+				greenTextCenterAlign(gameWord6, 14);
+				gameWord6.setFont(myFont);
+				greenTextCenterAlign(gameWord7, 14);
+				gameWord7.setFont(myFont);
+				greenTextCenterAlign(gameWord8, 14);
+				gameWord8.setFont(myFont);
+				greenTextCenterAlign(gameWord9, 14);
+				gameWord9.setFont(myFont);
+				greenTextCenterAlign(gameWord10, 14);
+				gameWord10.setFont(myFont);
+				greenTextCenterAlign(gameWord11, 14);
+				gameWord11.setFont(myFont);
+				greenTextCenterAlign(gameWord12, 14);
+				gameWord12.setFont(myFont);
+				greenTextCenterAlign(gameWord13, 14);
+				gameWord13.setFont(myFont);
+				greenTextCenterAlign(gameWord14, 14);
+				gameWord14.setFont(myFont);
 				
 				refresh();
 				
@@ -474,6 +480,54 @@ public class GUI extends JFrame {
 				} else if (gameWords.checkMatches(userGuess) == 8) {
 					lettersCorrect.setText("You got 8 letters correct");
 				}
+
+        // Greys out the text after guess matches with index of Arraylist
+				if (gameWords.getIndex(userGuess) == 0) {
+					gameWord0.setForeground(Color.gray);
+					gameWord0.setText("<html><strike>" + userGuess + "</strike></html>");
+				} else if (gameWords.getIndex(userGuess) == 1) {
+					gameWord1.setForeground(Color.gray);
+					gameWord1.setText("<html><strike>" + userGuess + "</strike></html>");
+				} else if (gameWords.getIndex(userGuess) == 2) {
+					gameWord2.setForeground(Color.gray);
+					gameWord2.setText("<html><strike>" + userGuess + "</strike></html>");
+				} else if (gameWords.getIndex(userGuess) == 3) {
+					gameWord3.setForeground(Color.gray);
+					gameWord3.setText("<html><strike>" + userGuess + "</strike></html>");
+				} else if (gameWords.getIndex(userGuess) == 4) {
+					gameWord4.setForeground(Color.gray);
+					gameWord4.setText("<html><strike>" + userGuess + "</strike></html>");
+				} else if (gameWords.getIndex(userGuess) == 5) {
+					gameWord5.setForeground(Color.gray);
+					gameWord5.setText("<html><strike>" + userGuess + "</strike></html>");
+				} else if (gameWords.getIndex(userGuess) == 6) {
+					gameWord6.setForeground(Color.gray);
+					gameWord6.setText("<html><strike>" + userGuess + "</strike></html>");
+				} else if (gameWords.getIndex(userGuess) == 7) {
+					gameWord7.setForeground(Color.gray);
+					gameWord7.setText("<html><strike>" + userGuess + "</strike></html>");
+				} else if (gameWords.getIndex(userGuess) == 8) {
+					gameWord8.setForeground(Color.gray);
+					gameWord8.setText("<html><strike>" + userGuess + "</strike></html>");
+				} else if (gameWords.getIndex(userGuess) == 9) {
+					gameWord9.setForeground(Color.gray);
+					gameWord9.setText("<html><strike>" + userGuess + "</strike></html>");
+				} else if (gameWords.getIndex(userGuess) == 10) {
+					gameWord10.setForeground(Color.gray);
+					gameWord10.setText("<html><strike>" + userGuess + "</strike></html>");
+				} else if (gameWords.getIndex(userGuess) == 11) {
+					gameWord11.setForeground(Color.gray);
+					gameWord11.setText("<html><strike>" + userGuess + "</strike></html>");
+				} else if (gameWords.getIndex(userGuess) == 12) {
+					gameWord12.setForeground(Color.gray);
+					gameWord12.setText("<html><strike>" + userGuess + "</strike></html>");
+				} else if (gameWords.getIndex(userGuess) == 13) {
+					gameWord13.setForeground(Color.gray);
+					gameWord13.setText("<html><strike>" + userGuess + "</strike></html>");
+				} else if (gameWords.getIndex(userGuess) == 14) {
+					gameWord14.setForeground(Color.gray);
+					gameWord14.setText("<html><strike>" + userGuess + "</strike></html>");
+				}
 				
 				// Changes the text to guesses left and displays the previous guessed words
 				if (gameWords.getGuessesLeft() == 3) {
@@ -533,9 +587,9 @@ public class GUI extends JFrame {
 				
 			} else if (event.getSource() == exitGame) {
 				System.exit(0);
-			}
+			} 
 			return;
-		}
+		}	
 	}
 	// Used to update the buttons and text after changing
 	public void refresh() {
