@@ -16,7 +16,7 @@ public class Words {
 	private ArrayList<String> listOfWords = new ArrayList<>();
 	private ArrayList<String> lastWord = new ArrayList<>();
 	
-	/*
+	/**
 	 * Loads a random set of words into an ArrayList. The length of words and
 	 * the number of words is based on the difficulty.
 	 * @param difficulty The level of difficulty (1-5) that the player will choose.
@@ -107,7 +107,7 @@ public class Words {
 	}// end of constructor
 	
 	
-	/*
+	/**
 	 * @return All words in wordsArr on their own line
 	 */
 	public String returnWordsList() {
@@ -120,7 +120,7 @@ public class Words {
 	}
 	
 	
-	/*
+	/**
 	 * @return The number of character matches, or 999 if correct.
 	 * @param guess The word selected by the user to guess.
 	 */
@@ -138,7 +138,7 @@ public class Words {
 	}
 	
 	
-	/*
+	/**
 	 * Increase the total score according to difficulty:
 	 * 1: +20
 	 * 2: +30
@@ -162,14 +162,14 @@ public class Words {
 	}
 	
 	
-	/*
+	/**
 	 * @return Returns totalScore;
 	 */
 	public int getTotalScore() {
 		return totalScore;
 	}
 	
-	/*
+	/**
 	 * @param index The index that will be returned from the list of words
 	 * @return returns a String from the index argument
 	 */
@@ -177,11 +177,15 @@ public class Words {
 		return listOfWords.get(index);
 	}
 	
+	
+	/**
+	 * Decrements the variable amountOfGuesses
+	 */
 	public void guessTaken() {
 		amountOfGuesses--;
 		return;
 	}
-	/*
+	/**
 	 * @return Returns the amount of guesses left
 	 */
 	public int getGuessesLeft() {
@@ -189,7 +193,7 @@ public class Words {
 	}
 	
 	
-	/*
+	/**
 	 * @return How difficult a word will be based on length and repeated characters
 	 * @param word The word to analyze
 	 */
@@ -237,7 +241,7 @@ public class Words {
 		}
 		
 	}
-	/*
+	/**
 	 * This method saves the last word that the user
 	 * has selected.
 	 * @param lastWord The word to assign to lastWord variable
@@ -248,7 +252,7 @@ public class Words {
 	}
 
 	
-	/*
+	/**
 	 * @return Gets the string from the last word ArrayList
 	 * @param index of the Last Word you want to return
 	 */

@@ -513,7 +513,7 @@ public class GUI extends JFrame {
 		repaint();
 		return;
 	}
-	/*
+	/**
 	 * @param Takes a JLabel argument and font size argument
 	 * and sets the font to color green
 	 */
@@ -522,7 +522,7 @@ public class GUI extends JFrame {
 		Label.setForeground(Color.green);
 		return;
 	}
-	/*
+	/**
 	 * @param Takes a JLabel argument and font size argument
 	 * and sets the font to color green, center aligns the JLabel in the grid
 	 */
@@ -532,7 +532,7 @@ public class GUI extends JFrame {
 		Label.setHorizontalAlignment(JLabel.CENTER);
 		return;
 	}
-	/*
+	/**
 	 * @param Takes a JLabel argument and font size argument
 	 * and sets the font to color white, center aligns the JLabel in the grid
 	 */
