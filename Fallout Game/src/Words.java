@@ -1,3 +1,4 @@
+
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -155,8 +156,8 @@ public class Words {
 		}
 		return -1;
 	}
-	
-	
+
+  
 	/**
 	 * Increase the total score according to difficulty:
 	 * 1: +20
@@ -218,48 +219,43 @@ public class Words {
 	 */
 	private int wordTest(String word){ //returns how difficult a word will be based on length and repeated characters. Have to account for some repeated character being repeated more than others. 
 		
-		String myword = word;
-		String temp = "";
-		StringBuilder sb;
 		int size = word.length(), repeats = 0, difficulty,counter;
 
-		Vector<Character> uniqueChars = new Vector<Character>();
+		Vector<Character> uniqueChars = new Vector<Character>(); //initialize the vector
 	
-		uniqueChars.add(word.charAt(word.length()-1));
+		uniqueChars.add(word.charAt(word.length()-1));//add last char of word to vector
 		
 		for(int i = 0; i < word.length() -1; i++){
-			if(word.charAt(i) != word.charAt(i+1) && !uniqueChars.contains(word.charAt(i))){
-				uniqueChars.add(word.charAt(i));
+			if(word.charAt(i) != word.charAt(i+1) && !uniqueChars.contains(word.charAt(i))){ //use (Vector).contains() to search for the char within the vector.
+				uniqueChars.add(word.charAt(i)); //If the char does equal the next char and it isnt found by contains, it adds it to uniqueChars vector.
 			}
 		}
 		
 
-		for(int i = 0; i < uniqueChars.size(); i++){
-			counter = 0;
-			for(int j= 0 ; j < word.length(); j++){
-				
+		for(int i = 0; i < uniqueChars.size(); i++){//This function iterates through uniqueChars and counts how many times each element/char appears within the word.
+			counter = 0; //Counter is reset with each iteration of uniqueChars.
+			for(int j= 0 ; j < word.length(); j++){		
 				if(word.charAt(j) == uniqueChars.get(i)){
-					counter++;
-					
+					counter++;	//Each time the char appears the counter is increased.
 				}
 				
 			}
-			if(counter > 1){
+			if(counter > 1){ //If it repeats more than once than add to repeat count.
 				repeats += counter;
 			}
 		
 		}
 		
 		
-		difficulty =  size - repeats;
-		if(difficulty >5){
+		difficulty =  size - repeats; 
+		if(difficulty >5){ //Makes 5 the max difficulty
 			return 5;
 		}
 		else{
 			return difficulty;
 		}
 		
-	}
+}
 	/**
 	 * This method saves the last word that the user
 	 * has selected.

@@ -480,7 +480,8 @@ public class GUI extends JFrame {
 				} else if (gameWords.checkMatches(userGuess) == 8) {
 					lettersCorrect.setText("You got 8 letters correct");
 				}
-				
+
+        // Greys out the text after guess matches with index of Arraylist
 				if (gameWords.getIndex(userGuess) == 0) {
 					gameWord0.setForeground(Color.gray);
 					gameWord0.setText("<html><strike>" + userGuess + "</strike></html>");
