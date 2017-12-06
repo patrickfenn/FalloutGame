@@ -1,3 +1,4 @@
+
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -226,8 +227,6 @@ public class Words {
 		
 		}
 		
-
-		System.out.print(repeats);
 		
 		difficulty =  size - repeats;
 		if(difficulty >5){
