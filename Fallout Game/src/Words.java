@@ -1,9 +1,11 @@
+
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.*;
 
 public class Words {
 	
@@ -69,7 +71,7 @@ public class Words {
 			        
 			        // If the current line is within a range of 600 of the target line, and
 			        // matches the number of characters, add it to the list
-					if (line.length()==wordSize+rand.nextInt(2) && count>=lineToRead-300 && count<=lineToRead+300) {
+					if (line.length()==wordSize+rand.nextInt(2) && count>=lineToRead-300 && count<=lineToRead+300 && wordTest(line) == difficulty) {
 						listOfWords.add(line);	
 						found = true;
 					}
@@ -191,23 +193,43 @@ public class Words {
 	 * @return How difficult a word will be based on length and repeated characters
 	 * @param word The word to analyze
 	 */
-	private int wordTest(String word){
-		int size = word.length();
-		int sameLetters = 0;
-		int difficulty;
+	private int wordTest(String word){ //returns how difficult a word will be based on length and repeated characters. Have to account for some repeated character being repeated more than others. 
 		
-		for(int i= 0; i < size - 1; i ++) {
-			if(word.indexOf(i) == word.indexOf(i+1)){
-				break;
-			}
-			else{
-				sameLetters++;
+		String myword = word;
+		String temp = "";
+		StringBuilder sb;
+		int size = word.length(), repeats = 0, difficulty,counter;
+
+		Vector<Character> uniqueChars = new Vector<Character>();
+	
+		uniqueChars.add(word.charAt(word.length()-1));
+		
+		for(int i = 0; i < word.length() -1; i++){
+			if(word.charAt(i) != word.charAt(i+1) && !uniqueChars.contains(word.charAt(i))){
+				uniqueChars.add(word.charAt(i));
 			}
 		}
 		
-		difficulty = size - sameLetters;
+
+		for(int i = 0; i < uniqueChars.size(); i++){
+			counter = 0;
+			for(int j= 0 ; j < word.length(); j++){
+				
+				if(word.charAt(j) == uniqueChars.get(i)){
+					counter++;
+					
+				}
+				
+			}
+			if(counter > 1){
+				repeats += counter;
+			}
 		
-		if(difficulty > 5){ //make 5 the greatest difficulty;
+		}
+		
+		
+		difficulty =  size - repeats;
+		if(difficulty >5){
 			return 5;
 		}
 		else{
@@ -215,28 +237,6 @@ public class Words {
 		}
 		
 	}
-	
-	
-	/*
-	 * @return A string of random symbols
-	 * @param length The number of symbols to return.
-	 */
-	private String getSymbols(int length){
-		
-		char[] list = {'!','@','#','$','%','^','&','*','(',')'};
-		String myString = "";
-		Random rand = new Random();
-		
-		for(int i = 0; i < length; i++){
-			myString += list[rand.nextInt()+list.length];
-		}
-		
-		
-		return myString;
-		
-	}
-	
-	
 	/*
 	 * This method saves the last word that the user
 	 * has selected.
