@@ -40,6 +40,7 @@ public class GUI extends JFrame {
 	private JLabel lettersCorrect;	// Notifys the user of how many letters they got correct
 	private JLabel guessHereLastWord;	// Notifys the user to type in their guess in guessHereTextField
 	private JTextField guessHereTextField;	// Textfield where the user will put in their guess
+	private JButton goBack; // Go back to home screen.
 	
 	// Objects end of game Screen
 	private JButton exitGame;	// Option to exit the program at the end of each game (Win or lose)
@@ -55,7 +56,7 @@ public class GUI extends JFrame {
 		southPanel.setBackground(Color.black);
 		
 		// Opening Screen Panel Layout
-		northPanel.setLayout(new GridLayout(1, 1));
+		northPanel.setLayout(new GridLayout(1, 2));
 		centerPanel.setLayout(new GridLayout(1, 1));
 		southPanel.setLayout(new GridLayout(1, 2));
 		
@@ -100,6 +101,9 @@ public class GUI extends JFrame {
 		
 		// Quit Button
 		exitGame = new JButton("Quit Game");
+
+		// Go back button
+		goBack = new JButton("Go Back");
 		
 		// ActionListeners
 		ButtonAction buttonAction = new ButtonAction();
@@ -109,6 +113,7 @@ public class GUI extends JFrame {
 		difficultySelectionButton.addActionListener(buttonAction);
 		guessHereTextField.addActionListener(buttonAction);
 		exitGame.addActionListener(buttonAction);
+		goBack.addActionListener(buttonAction);
 		
 		// Add panels to the BorderLayout
 		add(northPanel, BorderLayout.NORTH);
@@ -133,7 +138,6 @@ public class GUI extends JFrame {
 				southPanel.setLayout(new GridLayout(1, 2));
 				southPanel.add(difficultySelectionBox);
 				southPanel.add(difficultySelectionButton);
-				
 				refresh();
 				
 			} else if (event.getSource() == openingScreenHowToPlay) {
@@ -191,36 +195,66 @@ public class GUI extends JFrame {
 				
 			} else if (event.getSource() == difficultySelectionButton) {
 				// JLabel wordlist Objects
+				Font myFont = new Font(Font.MONOSPACED, Font.BOLD, 14);
 				JLabel gameWord0 = new JLabel("");
 				greenTextCenterAlign(gameWord0, 14);
+				gameWord0.setFont(myFont);
 				JLabel gameWord1 = new JLabel("");
 				greenTextCenterAlign(gameWord1, 14);
+				gameWord1.setFont(myFont);
+
 				JLabel gameWord2 = new JLabel("");
 				greenTextCenterAlign(gameWord2, 14);
+				gameWord2.setFont(myFont);
+
 				JLabel gameWord3 = new JLabel("");
 				greenTextCenterAlign(gameWord3, 14);
+				gameWord3.setFont(myFont);
+
 				JLabel gameWord4 = new JLabel("");
 				greenTextCenterAlign(gameWord4, 14);
+				gameWord4.setFont(myFont);
+
 				JLabel gameWord5 = new JLabel("");
 				greenTextCenterAlign(gameWord5, 14);
+				gameWord5.setFont(myFont);
+
 				JLabel gameWord6 = new JLabel("");
 				greenTextCenterAlign(gameWord6, 14);
+				gameWord6.setFont(myFont);
+
 				JLabel gameWord7 = new JLabel("");
 				greenTextCenterAlign(gameWord7, 14);
+				gameWord7.setFont(myFont);
+
 				JLabel gameWord8 = new JLabel("");
 				greenTextCenterAlign(gameWord8, 14);
+				gameWord8.setFont(myFont);
+
 				JLabel gameWord9 = new JLabel("");
 				greenTextCenterAlign(gameWord9, 14);
+				gameWord9.setFont(myFont);
+
 				JLabel gameWord10 = new JLabel("");
 				greenTextCenterAlign(gameWord10, 14);
+				gameWord10.setFont(myFont);
+
 				JLabel gameWord11 = new JLabel("");
 				greenTextCenterAlign(gameWord11, 14);
+				gameWord11.setFont(myFont);
+
 				JLabel gameWord12 = new JLabel("");
 				greenTextCenterAlign(gameWord12, 14);
+				gameWord12.setFont(myFont);
+
 				JLabel gameWord13 = new JLabel("");
 				greenTextCenterAlign(gameWord13, 14);
+				gameWord13.setFont(myFont);
+
 				JLabel gameWord14 = new JLabel("");
 				greenTextCenterAlign(gameWord14, 14);
+				gameWord14.setFont(myFont);
+
 				
 				// Set the text to guesses remaining = 4
 				numberOfGuessesRemaining.setText("Guesses remaining: 4");
@@ -239,6 +273,9 @@ public class GUI extends JFrame {
 				southPanel.add(lettersCorrect);
 				southPanel.add(guessHereLastWord);
 				southPanel.add(guessHereTextField);
+				whiteTextCenterAlign(gameTitle, 24);
+				northPanel.add(gameTitle);
+				northPanel.add(goBack);
 				
 				guessHereLastWord.setText("Enter your guess here:");
 				whiteTextCenterAlign(guessHereLastWord, 14);
@@ -504,8 +541,28 @@ public class GUI extends JFrame {
 			} else if (event.getSource() == exitGame) {
 				System.exit(0);
 			}
+
+			// the go back button goes to the previous screen
+			if(event.getSource() == goBack){
+				// Add text to center panel
+				centerPanel.removeAll();
+				centerPanel.setLayout(new GridLayout(1, 1));
+				difficultyText = new JLabel("Select difficulty then press start");
+				centerPanel.add(difficultyText);
+				greenTextCenterAlign(difficultyText, 16);
+				
+				// Remove southpanel buttons and replace with dropdown difficulty and button
+				southPanel.removeAll();
+				southPanel.setLayout(new GridLayout(1, 2));
+				southPanel.add(difficultySelectionBox);
+				southPanel.add(difficultySelectionButton);			
+				northPanel.remove(goBack);
+				refresh();
+			}
+			
 			return;
 		}
+
 	}
 	// Used to update the buttons and text after changing
 	public void refresh() {
@@ -513,7 +570,7 @@ public class GUI extends JFrame {
 		repaint();
 		return;
 	}
-	/*
+	/**
 	 * @param Takes a JLabel argument and font size argument
 	 * and sets the font to color green
 	 */
@@ -522,7 +579,7 @@ public class GUI extends JFrame {
 		Label.setForeground(Color.green);
 		return;
 	}
-	/*
+	/**
 	 * @param Takes a JLabel argument and font size argument
 	 * and sets the font to color green, center aligns the JLabel in the grid
 	 */
@@ -532,7 +589,7 @@ public class GUI extends JFrame {
 		Label.setHorizontalAlignment(JLabel.CENTER);
 		return;
 	}
-	/*
+	/**
 	 * @param Takes a JLabel argument and font size argument
 	 * and sets the font to color white, center aligns the JLabel in the grid
 	 */
