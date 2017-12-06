@@ -191,36 +191,66 @@ public class GUI extends JFrame {
 				
 			} else if (event.getSource() == difficultySelectionButton) {
 				// JLabel wordlist Objects
+				Font myFont = new Font(Font.MONOSPACED, Font.BOLD, 14);
 				JLabel gameWord0 = new JLabel("");
 				greenTextCenterAlign(gameWord0, 14);
+				gameWord0.setFont(myFont);
 				JLabel gameWord1 = new JLabel("");
 				greenTextCenterAlign(gameWord1, 14);
+				gameWord1.setFont(myFont);
+
 				JLabel gameWord2 = new JLabel("");
 				greenTextCenterAlign(gameWord2, 14);
+				gameWord2.setFont(myFont);
+
 				JLabel gameWord3 = new JLabel("");
 				greenTextCenterAlign(gameWord3, 14);
+				gameWord3.setFont(myFont);
+
 				JLabel gameWord4 = new JLabel("");
 				greenTextCenterAlign(gameWord4, 14);
+				gameWord4.setFont(myFont);
+
 				JLabel gameWord5 = new JLabel("");
 				greenTextCenterAlign(gameWord5, 14);
+				gameWord5.setFont(myFont);
+
 				JLabel gameWord6 = new JLabel("");
 				greenTextCenterAlign(gameWord6, 14);
+				gameWord6.setFont(myFont);
+
 				JLabel gameWord7 = new JLabel("");
 				greenTextCenterAlign(gameWord7, 14);
+				gameWord7.setFont(myFont);
+
 				JLabel gameWord8 = new JLabel("");
 				greenTextCenterAlign(gameWord8, 14);
+				gameWord8.setFont(myFont);
+
 				JLabel gameWord9 = new JLabel("");
 				greenTextCenterAlign(gameWord9, 14);
+				gameWord9.setFont(myFont);
+
 				JLabel gameWord10 = new JLabel("");
 				greenTextCenterAlign(gameWord10, 14);
+				gameWord10.setFont(myFont);
+
 				JLabel gameWord11 = new JLabel("");
 				greenTextCenterAlign(gameWord11, 14);
+				gameWord11.setFont(myFont);
+
 				JLabel gameWord12 = new JLabel("");
 				greenTextCenterAlign(gameWord12, 14);
+				gameWord12.setFont(myFont);
+
 				JLabel gameWord13 = new JLabel("");
 				greenTextCenterAlign(gameWord13, 14);
+				gameWord13.setFont(myFont);
+
 				JLabel gameWord14 = new JLabel("");
 				greenTextCenterAlign(gameWord14, 14);
+				gameWord14.setFont(myFont);
+
 				
 				// Set the text to guesses remaining = 4
 				numberOfGuessesRemaining.setText("Guesses remaining: 4");
